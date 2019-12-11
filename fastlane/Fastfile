@@ -1,8 +1,6 @@
 #update_fastlane
 
 default_platform(:android)
-
-
   before_all do
     f = File.open("../local.properties", "r")
     ENV["SLACK_URL"] = f.each_line.to_a.last.split('=').last
@@ -27,11 +25,11 @@ default_platform(:android)
          message: exception.message,
          success: false
          )
-     end
+    end
+end
 
 #  desc "Deploy a new version to the Google Play"
 #  lane :deploy do
 #    gradle(task: "clean assembleRelease")
 #    upload_to_play_store
 #  end
-end
