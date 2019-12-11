@@ -2,18 +2,33 @@
 
 default_platform(:android)
 
-platform :android do
-  desc "Runs all the tests"
-  lane :tests do
-    gradle(task: "test")
+
+  before_all do
+    f = File.open("../local.properties", "r")
+    ENV["SLACK_URL"] = f.each_line.to_a.last.split('=').last
+    f.close
   end
 
   desc "build the application"
-  lane :app_build do
+  lane :playstore do
     gradle(
       task: "clean assembleRelease",
     )
+    upload_to_play_store
   end
+
+  after_all do |lane|
+      slack(
+        message: "Build successful"
+      )
+   end
+
+   error do |lane, exception|
+       slack(
+         message: exception.message,
+         success: false
+         )
+     end
 
 #  desc "Deploy a new version to the Google Play"
 #  lane :deploy do
