@@ -16,6 +16,7 @@ default_platform(:android)
 
   after_all do |lane|
       slack(
+        channel: "#sportsme_pipeline_alerts"
         message: "Build successful"
       )
    end
@@ -28,8 +29,3 @@ default_platform(:android)
     end
 
 
-#  desc "Deploy a new version to the Google Play"
-#  lane :deploy do
-#    gradle(task: "clean assembleRelease")
-#    upload_to_play_store
-#  end
