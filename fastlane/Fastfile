@@ -8,19 +8,10 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "clean build directory"
-  lane :clean_build do
-    gradle(
-      task: "clean",
-    )
-  end
-
-
   desc "build the application"
   lane :app_build do
     gradle(
-      task: "assemble",
-      build_type: "Release"
+      task: "clean assembleRelease",
     )
   end
 
