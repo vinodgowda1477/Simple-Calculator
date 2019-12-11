@@ -1,10 +1,14 @@
 #update_fastlane
 
 default_platform(:android)
+#  before_all do
+#    f = File.open("../local.properties", "r")
+#    ENV["SLACK_URL"] = f.each_line.to_a.last.split('=').last
+#    f.close
+#   end
+
   before_all do
-    f = File.open("../local.properties", "r")
-    ENV["SLACK_URL"] = f.each_line.to_a.last.split('=').last
-    f.close
+    ENV["SLACK_URL"] = https://hooks.slack.com/services/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
   end
 
   desc "build the application"
@@ -16,7 +20,6 @@ default_platform(:android)
 
   after_all do |lane|
       slack(
-        channel: "#sportsme_pipeline_alerts",
         message: "Build successful"
       )
    end
