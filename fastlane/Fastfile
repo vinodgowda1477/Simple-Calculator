@@ -16,7 +16,7 @@ default_platform(:android)
 
   after_all do |lane|
       slack(
-        channel: "#sportsme_pipeline_alerts"
+        channel: "#sportsme_pipeline_alerts",
         message: "Build successful"
       )
    end
