@@ -14,7 +14,6 @@ default_platform(:android)
     gradle(
       task: "clean assembleRelease",
     )
-    upload_to_play_store
   end
 
   after_all do |lane|
