@@ -1,15 +1,15 @@
 #update_fastlane
 
 default_platform(:android)
-#  before_all do
-#    f = File.open("../local.properties", "r")
-#    ENV["SLACK_URL"] = f.each_line.to_a.last.split('=').last
-#    f.close
-#   end
-
   before_all do
-    ENV["SLACK_URL"] = https://hooks.slack.com/services/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
+    f = File.open("../local.properties", "r")
+    ENV["SLACK_URL"] = f.each_line.to_a.last.split('=').last
+    f.close
   end
+
+#  before_all do
+#    ENV["slack_url"] = "https://hooks.slack.com/services/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"
+#  end
 
   desc "build the application"
   lane :playstore do
@@ -20,7 +20,8 @@ default_platform(:android)
 
   after_all do |lane|
       slack(
-        message: "Build successful"
+        message: "Build successful",
+        success: true
       )
    end
 
@@ -30,5 +31,4 @@ default_platform(:android)
          success: false
          )
     end
-
 

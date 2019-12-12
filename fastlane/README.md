@@ -15,15 +15,9 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
-## Android
-### android tests
+### playstore
 ```
-fastlane android tests
-```
-Runs all the tests
-### android app_build
-```
-fastlane android app_build
+fastlane playstore
 ```
 build the application
 
