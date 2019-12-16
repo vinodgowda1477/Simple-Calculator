@@ -1,21 +1,19 @@
-#update_fastlane
+update_fastlane
+fastlane_require 'dotenv'
+
 
 default_platform(:android)
-  before_all do
-    f = File.open("../local.properties", "r")
-    ENV["SLACK_URL"] = f.each_line.to_a.last.split('=').last
-    f.close
-  end
-
-#  before_all do
-#    ENV["slack_url"] = "https://hooks.slack.com/services/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"
-#  end
-
   desc "build the application"
   lane :playstore do
     gradle(
-      task: "clean assembleRelease",
+      task: "clean assembleDebug",
     )
+
+  testfairy(
+    api_key: ENV['API_KEY'],
+    apk: ENV['APK_PATH'],
+    comment: "QA BUILD",
+  )
   end
 
   after_all do |lane|
@@ -32,3 +30,7 @@ default_platform(:android)
          )
     end
 
+
+#  before_all do
+#    Dotenv.overload '.env.qa'
+#  end
