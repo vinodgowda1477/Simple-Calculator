@@ -13,11 +13,15 @@ default_platform(:android)
     api_key: ENV['API_KEY'],
     apk: ENV['APK_PATH'],
     comment: "QA BUILD",
+    testers_groups: [sportsme],
+    notify: on,
+    metrics: [memory,network,phone_signal,gps,battery,mic,wifi],
   )
   end
 
   after_all do |lane|
       slack(
+        slack_url: ENV['SLACK_URL'],
         message: "Build successful",
         success: true
       )
